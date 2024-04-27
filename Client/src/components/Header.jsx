@@ -5,7 +5,7 @@ function Header(){
     return(
         <header>
             <Link to="/">
-                <img src="/Logo.jpg" alt="VisionaryEd" width="40%" height="auto" />
+                <img src="/Logo.jpg" alt="VisionaryEd" width="45%" height="auto" />
             </Link>
         </header>
     )
