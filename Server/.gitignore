@@ -1,2 +1,22 @@
 # Ignore .env file
 .env
+
+# Ignore node_modules directory
+node_modules/
+
+# Ignore log files
+*.log
+
+# Ignore environment-specific files
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
+
+# Ignore build/output directories
+dist/
+build/
