@@ -80,7 +80,8 @@ PORT=5000
 MONGO_URI=your_mongodb_connection_string
 EMAIL_USER=your_email_address
 EMAIL_PASS=your_email_password
-JWT_SECRET=your_jwt_secret_key
+SENDER_NAME=your_email_sender_name
+SENDER_EMAIL=your_email_address
 ```
 ### Step 4: Start the Backend Server
 Run the backend server using the following command:
