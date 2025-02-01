@@ -3,12 +3,14 @@ import cors from "cors";
 import mongoose from "mongoose";
 import nodemailer from "nodemailer";
 import bodyParser from "body-parser";
+import dotenv from "dotenv";
 
-const PORT = 5050;
+dotenv.config();
+const PORT = process.env.PORT;
 const app = express();
 
 // Connect to MongoDB database
-mongoose.connect("mongodb+srv://parminder2002ldh:VisionaryEd@visionaryedcluster.70agi2z.mongodb.net/?retryWrites=true&w=majority&appName=VisionaryEdCluster")
+mongoose.connect(process.env.MONGO_URI);
   .then(() => console.log("Connected to MongoDB"))
   .catch((error) => console.error("Error connecting to MongoDB:", error));
 
@@ -45,8 +47,8 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: "visionaryedowner@gmail.com",
-    pass: "vehx xjqv pjsx tger",
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
   },
 });
 
@@ -62,9 +64,8 @@ app.post('/registrationdetails', async (req, res) => {
 });
 
 async function sendRegistrationEmail(email, name) {
-  const senderName = 'VisionaryEd Team';
   const mailOptions = {
-    from:`"${senderName}" <visionaryedowner@gmail.com>`,
+    from: `"${process.env.SENDER_NAME}" <${process.env.SENDER_EMAIL}>`,
     to: email,
     subject: 'Welcome to VisionaryEd - Your Gateway to Top Engineering Institutes in India!',
     html: `
