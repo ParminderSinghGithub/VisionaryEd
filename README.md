@@ -166,6 +166,38 @@ Use the platform to guide students with accurate and centralized information abo
 - Check IP address whitelist in MongoDB Atlas (allow 0.0.0.0/0 for development)
 - Ensure the database name is included in the connection string
 
+---
+
+## Deployment
+
+Recommended setup:
+- **Frontend**: Vercel
+- **Backend**: Render
+- **Database**: MongoDB Atlas
+
+### Backend on Render
+1. Create a new Render Web Service from the `Server` folder.
+2. Set the build/start command to use the backend scripts.
+3. Add these environment variables in Render:
+  - `MONGO_URI`
+  - `EMAIL_USER`
+  - `EMAIL_PASS`
+  - `SENDER_NAME`
+  - `SENDER_EMAIL`
+  - `CLIENT_URLS` = your Vercel frontend URL, plus `http://localhost:3001` for local testing if needed
+4. Use the `/health` endpoint for a quick uptime check.
+
+### Frontend on Vercel
+1. Create a new Vercel project from the `Client` folder.
+2. Set `VITE_API_BASE_URL` to your Render backend URL.
+3. Keep the default Vercel build output from Vite.
+4. The `Client/vercel.json` rewrite keeps React Router routes working.
+
+### Example frontend env
+```bash
+VITE_API_BASE_URL=https://your-render-service.onrender.com
+```
+
 --- 
 
 ## Developer Information

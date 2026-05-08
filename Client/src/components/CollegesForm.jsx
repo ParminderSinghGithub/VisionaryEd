@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API_BASE_URL } from "../config";
 
 function CollegesForm() {
     const [formData, setFormData] = useState(
@@ -26,7 +27,7 @@ function CollegesForm() {
         setLoading(true);
         try {
             const queryString = new URLSearchParams(formData).toString();
-            const response = await fetch(`http://localhost:5000/collegedetails?${queryString}`);
+            const response = await fetch(`${API_BASE_URL}/collegedetails?${queryString}`);
             const data = await response.json();
             setFetchedData(data);
             setError(null);

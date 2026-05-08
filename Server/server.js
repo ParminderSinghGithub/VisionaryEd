@@ -6,7 +6,12 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 
 dotenv.config();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
+const allowedOrigins = [process.env.CLIENT_URLS, process.env.CLIENT_URL]
+  .filter(Boolean)
+  .flatMap((value) => value.split(","))
+  .map((value) => value.trim())
+  .filter(Boolean);
 const app = express();
 
 // Connect to MongoDB database
@@ -36,9 +41,13 @@ const CollegeSchema = new mongoose.Schema({
 const CollegeModel = mongoose.model("colleges", CollegeSchema);
 
 // Middleware
-app.use(cors());
+app.use(cors(allowedOrigins.length ? { origin: allowedOrigins } : {}));
 app.use(express.json());
 app.use(bodyParser.json());
+
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
 
 // Routes
 const transporter = nodemailer.createTransport({
@@ -138,6 +147,6 @@ app.get("/collegedetails", async (req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server listening on port ${PORT}`);
 });
