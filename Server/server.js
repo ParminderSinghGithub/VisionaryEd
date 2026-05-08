@@ -12,6 +12,31 @@ const allowedOrigins = [process.env.CLIENT_URLS, process.env.CLIENT_URL]
   .flatMap((value) => value.split(","))
   .map((value) => value.trim())
   .filter(Boolean);
+const corsOptions = allowedOrigins.length
+  ? {
+      origin(origin, callback) {
+        if (!origin) {
+          return callback(null, true);
+        }
+
+        if (allowedOrigins.includes(origin)) {
+          return callback(null, true);
+        }
+
+        if (/^https:\/\/[a-z0-9-]+\.vercel\.app$/i.test(origin)) {
+          return callback(null, true);
+        }
+
+        if (/^http:\/\/localhost:\d+$/i.test(origin)) {
+          return callback(null, true);
+        }
+
+        return callback(new Error(`CORS blocked for origin: ${origin}`));
+      },
+    }
+  : {
+      origin: true,
+    };
 const app = express();
 
 // Connect to MongoDB database
@@ -41,7 +66,8 @@ const CollegeSchema = new mongoose.Schema({
 const CollegeModel = mongoose.model("colleges", CollegeSchema);
 
 // Middleware
-app.use(cors(allowedOrigins.length ? { origin: allowedOrigins } : {}));
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 app.use(express.json());
 app.use(bodyParser.json());
 
