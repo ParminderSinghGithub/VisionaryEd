@@ -12,7 +12,7 @@ function Signup() {
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await fetch("http://localhost:5050/registrationdetails", {
+            const response = await fetch("http://localhost:5000/registrationdetails", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

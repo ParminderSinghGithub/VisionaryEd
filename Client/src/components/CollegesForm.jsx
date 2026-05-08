@@ -26,7 +26,7 @@ function CollegesForm() {
         setLoading(true);
         try {
             const queryString = new URLSearchParams(formData).toString();
-            const response = await fetch(`http://localhost:5050/collegedetails?${queryString}`);
+            const response = await fetch(`http://localhost:5000/collegedetails?${queryString}`);
             const data = await response.json();
             setFetchedData(data);
             setError(null);

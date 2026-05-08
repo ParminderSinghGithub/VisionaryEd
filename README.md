@@ -59,55 +59,112 @@ VisionaryEd offers the following key functionalities:
 To set up VisionaryEd locally, follow these steps:
 
 ### Prerequisites
-- **Node.js**: Ensure Node.js is installed on your system.
-- **MongoDB**: Install MongoDB locally or use a cloud-based MongoDB service.
+- **Node.js**: Ensure Node.js (v16 or higher) is installed on your system.
+- **MongoDB**: Use MongoDB Atlas (cloud-based service - recommended) or install MongoDB locally.
+- **Gmail Account**: For email functionality, you'll need a Gmail account with app-specific password enabled.
 
 ### Step 1: Clone the Repository
-```
+```bash
 git clone https://github.com/ParminderSinghGithub/VisionaryEd.git
 cd VisionaryEd
 ```
+
 ### Step 2: Install Backend Dependencies
 Navigate to the backend directory and install dependencies:
-```
+```bash
 cd Server
 npm install
 ```
+
 ### Step 3: Set Up Environment Variables for Backend
-Create a .env file in the backend directory and add the following variables:
+Create a `.env` file in the `Server` directory with the following variables:
 ```
 PORT=5000
-MONGO_URI=your_mongodb_connection_string
-EMAIL_USER=your_email_address
-EMAIL_PASS=your_email_password
-SENDER_NAME=your_email_sender_name
-SENDER_EMAIL=your_email_address
+MONGO_URI=mongodb+srv://username:password@clustername.mongodb.net/visionaryed?retryWrites=true&w=majority
+EMAIL_USER=your_gmail_email@gmail.com
+EMAIL_PASS=your_16_digit_app_password
+SENDER_NAME=VisionaryEd
+SENDER_EMAIL=your_gmail_email@gmail.com
 ```
+
+**Important Notes:**
+- **MONGO_URI**: Replace with your MongoDB Atlas connection string (includes username, password, and cluster name). The database name `visionaryed` should be included at the end.
+- **EMAIL_USER** and **SENDER_EMAIL**: Use your Gmail email address.
+- **EMAIL_PASS**: This is NOT your regular Gmail password. Generate an **App-Specific Password** by:
+  1. Going to https://myaccount.google.com/security
+  2. Enabling 2-Step Verification (if not already enabled)
+  3. Generating an "App Password" for Mail/Windows
+  4. Copy the 16-digit password and paste it as EMAIL_PASS
+
 ### Step 4: Start the Backend Server
-Run the backend server using the following command:
-```
+Run the backend server using one of these commands:
+```bash
+# Option 1: Using Node directly
 node server.js
+
+# Option 2: Using Nodemon for development (auto-restart on file changes)
+npx nodemon server.js
 ```
-The backend will start running on http://localhost:5000.
+The backend will start running on `http://localhost:5000`.
 
 ### Step 5: Install Frontend Dependencies
 Open a new terminal, navigate to the frontend directory, and install dependencies:
-```
+```bash
 cd ../Client
 npm install
 ```
+
 ### Step 6: Start the Frontend Application
 Run the frontend application using:
+```bash
+npm run dev
 ```
-npm start
-```
-The frontend will start running on http://localhost:3000.
+The frontend will start running on `http://localhost:3001`.
 
 --- 
 
 ## Usage
-**Students**: Register, log in, and explore cutoff details, exam dates, and official IIT links.  
-**Educators**: Use the platform to guide students with accurate and centralized information.
+
+### For Students:
+1. **Register**: Click on the "Sign Up" button and provide your name, email, and password.
+2. **Receive Welcome Email**: You'll automatically receive a welcome email at your registered email address.
+3. **Login**: Use your email and password to log in to the platform.
+4. **Explore IIT Information**:
+   - Navigate to the **Colleges** section to view cutoff details for top IITs.
+   - Filter by Institute, Academic Program, Quota, Seat Type, and Gender to find relevant information.
+   - Click on institute links to visit their official websites.
+5. **Check Event Calendar**: View important exam dates and admission deadlines in the Event Calendar.
+6. **Browse FAQs**: Get answers to common questions about IIT admissions and the platform.
+
+### For Educators:
+Use the platform to guide students with accurate and centralized information about IIT admissions, cutoffs, and important dates.
+
+---
+
+## Troubleshooting
+
+### Common Issues:
+
+**1. Backend server won't start**
+- Ensure MongoDB connection string is correct in `.env`
+- Check if port 5000 is already in use: `netstat -an | findstr :5000` (Windows)
+- Verify all environment variables are set in `.env`
+
+**2. Emails not sending**
+- Verify EMAIL_USER is your full Gmail address
+- Ensure EMAIL_PASS is the 16-digit app-specific password (not your regular Gmail password)
+- Check if 2-Step Verification is enabled on your Gmail account
+- Look for SMTP errors in the backend console
+
+**3. Frontend won't start**
+- Delete `node_modules` and `package-lock.json`, then run `npm install` again
+- Ensure Node.js version is v16 or higher: `node --version`
+- Check if port 3001 is already in use
+
+**4. MongoDB connection errors**
+- Verify the connection string includes your username and password
+- Check IP address whitelist in MongoDB Atlas (allow 0.0.0.0/0 for development)
+- Ensure the database name is included in the connection string
 
 --- 
 
