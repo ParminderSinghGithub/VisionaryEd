@@ -6,18 +6,31 @@
 
 ## Table of Contents
 1. [Introduction](#introduction)
-2. [Problem Statement](#problem-statement)
-3. [Solution Overview](#solution-overview)
-4. [Features](#features)
-5. [Technologies Used](#technologies-used)
-6. [Installation](#installation)
-7. [Usage](#usage)
-8. [Developer Information](#developer-information)
+2. [Live Demo](#live-demo)
+3. [Demo Preview](#demo-preview)
+4. [Problem Statement](#problem-statement)
+5. [Solution Overview](#solution-overview)
+6. [Features](#features)
+7. [Web Performance & Optimization](#web-performance--optimization)
+8. [Technologies Used](#technologies-used)
+9. [Installation](#installation)
+10. [Usage](#usage)
+11. [Developer Information](#developer-information)
 
 ---
 
 ## Introduction
 VisionaryEd is a **user-friendly web platform** that provides aspiring students with a **centralized resource** for accessing information about IITs. The platform leverages the **MERN stack** to deliver a seamless and interactive experience, making it easier for students to navigate through crucial details like cutoffs, exam dates, and official IIT websites.
+
+---
+
+## Live Demo
+- **Frontend URL**: https://visionary-ed.vercel.app/
+
+---
+
+## Demo Preview
+![VisionaryEd Demo](demo.gif)
 
 ---
 
@@ -43,6 +56,44 @@ VisionaryEd offers the following key functionalities:
 - **IIT Cutoffs Form**: A form to retrieve cutoff details of the top 7 IITs.
 - **Official IIT Links**: Direct links to the official websites of IITs.
 - **Event Calendar**: Displays important dates and exam-related information.
+
+---
+
+## Web Performance & Optimization
+
+### Lighthouse Scores
+
+| Category       | Score |
+| -------------- | ----- |
+| Performance    | 98    |
+| Accessibility  | 94    |
+| Best Practices | 100   |
+| SEO            | 75    |
+
+### Core Metrics
+
+| Metric                         | Result |
+| ------------------------------ | ------ |
+| First Contentful Paint (FCP)   | 1.5s   |
+| Largest Contentful Paint (LCP) | 1.5s   |
+| Total Blocking Time (TBT)      | 130ms  |
+| Cumulative Layout Shift (CLS)  | 0      |
+| Speed Index                    | 1.5s   |
+
+### Implemented Optimizations
+- Frontend optimized for static delivery on **Vercel**.
+- Backend deployed on **Render** with scalable API handling.
+- Lightweight and responsive React UI with stable rendering.
+- Low layout shift achieved for a consistent visual experience.
+- Improved accessibility and best-practice compliance.
+
+### Test Context
+- Tested with **Google Lighthouse 13.0.2**
+- Mobile emulation + slow 4G network throttling
+- Chromium DevTools environment
+
+### Report Reference
+- Full report: [Web Performance Report](Web%20Performance%20Report.pdf)
 
 ---
 
